@@ -1,0 +1,103 @@
+# 阶段
+stages:
+  - test
+  - install
+  - build
+  - deploy
+  # 缓存 node_modules 减少打包时间，默认会清除 node_modules 和 dist 
+cache:
+  paths:
+    - node_modules/
+    - dist/
+
+# 测试脚本执行
+dev-test:
+  stage: test # 阶段名称 对应，stages
+  tags:
+    - vite-vue
+  only: 
+    - dev #拉取分支
+  script:
+    - ls
+    
+    - pwd # pwd 查看当前文件夹所在目录
+
+    - node -v
+    
+    - npm -v
+
+# 安装依赖
+dev-install:
+  stage: install # 阶段名称 对应，stages
+  tags:  # 对应gitlab-runner 的tags
+    - vite-vue
+  only: 
+    # 目前只有dev分支会触发安装操作
+    refs:
+      - dev
+    # 仅在以下文件变化时触发install逻辑 <---
+    changes:
+      - package.json
+      - package-lock.json
+  script: # 脚本（执行的命令行）
+    - echo '================ installing =================='
+
+    - npm install # 安装依赖
+
+    - echo '================ installed success =================='
+
+  cache:
+    key: "node_modules"
+    paths:
+      - node_modules/
+    policy: pull-push
+
+# 拉取项目，打包
+dev-build:
+  stage: build # 阶段名称 对应，stages
+  tags: # runner 标签(注册runner时设置的，可在 admin->runner中查看)
+    - vite-vue
+  only:
+    - dev #拉取分支
+  script: # 脚本（执行的命令行）
+
+    - pwd # pwd 查看当前文件夹所在目录
+
+    - cd ${CI_PROJECT_DIR} # 拉取项目的根目录
+
+    - npm run build:dev # 运行构建命令
+
+  cache:
+    key: "node_modules" # 使用与pre_install相同的cache:key
+    paths:
+      - node_modules/
+    policy: pull
+
+  artifacts:   # 把 dist 的内容传递给下一个阶
+    paths:
+        - dist/
+
+# 部署
+dev-deploy:
+  stage: deploy # 阶段名称 对应，stages
+  tags: # runner 标签(注册runner时设置的)
+    - vite-vue
+  script: # 脚本（执行的命令行）
+  # 备份旧版本,修改原始latest名=> latest[时间戳]
+    - ls
+
+    - pwd # pwd 查看当前文件夹所在目录
+
+    - node ./deploy/deploy.js './dist/' '/www/wwwroot/copyBackups/latest'
+
+    - rm -rf /www/wwwroot/vue-demo/* # 删除原本的部署文件
+
+    - cp -rf ${CI_PROJECT_DIR}/dist/* /www/wwwroot/vue-demo/ # 把包完成，复制 dist 下的文件到对应的项目位置
+
+    - echo '================ deploy finished =================='
+
+  cache:
+    key: "node_modules"
+    paths:
+      - node_modules/
+    policy: pull

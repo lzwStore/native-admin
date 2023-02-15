@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "types": ["node", "naive-ui/volar"],
+    "typeRoots": ["./node_modules/@types/", "./types"],
+    "baseUrl": "./", // 解析非相对模块的基础地址，默认是当前目录
+    "paths": {
+      // 路径映射，相对于baseUrl
+      "@/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "./*.d.ts",
+    "src/components/SvgIcon/svgInstall.js",
+    "types/*.d.ts",
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
