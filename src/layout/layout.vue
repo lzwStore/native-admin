@@ -38,7 +38,7 @@
           @toggle="collapsed = !collapsed"
         ></HeaderVue>
         <n-layout-content class="layout_content">
-          <Breadcrumb style="padding: 10px 10px 0 10px"></Breadcrumb>
+          <Breadcrumb></Breadcrumb>
           <div
             class="mt10"
             style="padding: 0 10px 20px"
@@ -118,29 +118,27 @@ watch(
       height: calc(100vh - 140px);
       overflow-y: auto;
       padding-bottom: 20px;
-      /*滚动条样式*/
-      &::-webkit-scrollbar {
-        width: 10px;
-        /*height: 4px;*/
-      }
-      &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        background: rgba(0, 0, 0, 0.2);
-      }
+      margin-top: 5px;
     }
   }
 }
-.n-layout-header {
-  // background: rgba(128, 128, 128, 0.2);
-  // padding: 24px;
+// 滚动条宽度
+::-webkit-scrollbar {
+    width: 5px; /* 纵向滚动条*/
+    height: 5px; /* 横向滚动条 */
+    background-color: #fff;
 }
 
-.n-layout-sider {
-  // background: rgba(128, 128, 128, 0.3);
+/*定义滚动条轨道 内阴影*/
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: #ccc;
 }
 
-.n-layout-content {
-  // background: rgba(128, 128, 128, 0.4);
+/*定义滑块 内阴影*/
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: #aaabad;
+    border-radius: 10px;
 }
 </style>
