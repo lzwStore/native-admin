@@ -55,7 +55,6 @@ export function useECharts(
 
   function setOptions(options: EChartsOption, clear = true) {
     cacheOptions.value = options
-    console.log('初始化', unref(elRef)?.offsetHeight, unref(getOptions), chartInstance)
 
     if (unref(elRef)?.offsetHeight === 0) {
       setOptions(unref(getOptions))

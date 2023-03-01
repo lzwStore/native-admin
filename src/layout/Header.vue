@@ -54,7 +54,7 @@
           <n-avatar
             round
             size="small"
-            src="https://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%B4%E5%83%8F&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=&latest=&copyright=&cs=1316535536,2169855958&os=1650322977,3711014696&simid=1316535536,2169855958&pn=19&rn=1&di=7169026086108397569&ln=1823&fr=&fmq=1675308204055_R&ic=&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=1e&objurl=http%3A%2F%2Fimg.duoziwang.com%2F2019%2F02%2F04091610283767.jpg&rpstart=0&rpnum=0&adpicid=0&nojc=undefined&dyTabStr=MCwzLDYsNCwxLDUsMiw3LDgsOQ%3D%3D"
+            src="../assets/images/avatar.png"
           />
         </n-dropdown>
       </div>
