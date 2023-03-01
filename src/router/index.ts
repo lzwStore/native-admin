@@ -2,6 +2,7 @@ import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router'
 import pages from './pages'
 import type { Component } from 'vue'
 import { createDiscreteApi } from 'naive-ui'
+import useStore from '@/store/index'
 
 // 对RouteRecordRaw类型进行扩展
 export type AddRouteRecordRaw = RouteRecordRaw & {
@@ -37,7 +38,6 @@ const routes: AddRouteRecordRaw[] = [
     }
   }
 ]
-
 const router = createRouter({
   history: createWebHashHistory(),
   // 刷新时，滚动条位置还原
@@ -46,6 +46,13 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const store = useStore()
+  console.log('store', store.user.isLogin)
+  if (!store.user.isLogin) {
+    next({ path: '/login' })
+    store.user.isLogin = true
+    return
+  }
   loadingBar.start()
   next()
 })

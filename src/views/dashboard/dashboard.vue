@@ -1,14 +1,16 @@
 <template>
   <n-grid
     x-gap="12"
-    :cols="4"
+    cols="1 s:2 m:4 l:4 xl:4 2xl:4"
+    responsive="screen"
   >
     <n-gi
       v-for="item in list"
       :key="item.title"
+      class="dashboard-header"
     >
       <div
-        class="block_banner"
+        class="block_banner mb20px min-w200px"
         :style="{ background: app.themeColor }"
       >
         <div class="flex_column left">
@@ -50,9 +52,9 @@
     </n-gi>
   </n-grid>
   <n-grid
-    style="margin-top: 20px"
     x-gap="24"
-    :cols="2"
+    cols="1 s:1 m:2 l:2 xl:2 2xl:2"
+    responsive="screen"
   >
     <n-gi
       class="chart_container"
@@ -78,9 +80,9 @@
     </n-gi>
   </n-grid>
   <n-grid
-    style="margin-top: 20px"
     x-gap="24"
-    :cols="2"
+    cols="1 s:1 m:2 l:2 xl:2 2xl:2"
+    responsive="screen"
   >
     <n-gi
       class="chart_container"
@@ -386,6 +388,7 @@ onMounted(() => {
 }
 .chart_container {
   background-color: #fff;
+  margin-bottom: 20px;
   .title {
     line-height: 40px;
     text-align: left;

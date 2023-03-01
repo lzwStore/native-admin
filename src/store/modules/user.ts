@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', {
   state: () => ({
     name: '张三',
-    counter: 99
+    counter: 99,
+    isLogin: false
   }),
   actions: {
     increment () {
