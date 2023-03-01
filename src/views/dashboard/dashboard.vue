@@ -10,7 +10,7 @@
       class="dashboard-header"
     >
       <div
-        class="block_banner mb20px min-w200px"
+        class="block_banner mb20px min-w168px"
         :style="{ background: app.themeColor }"
       >
         <div class="flex_column left">
@@ -176,7 +176,7 @@ const { setOptions: setOptions3 } = useECharts(chartRef3 as Ref<HTMLDivElement>)
 onMounted(() => {
   setOptions({
     tooltip: {
-      // trigger: 'axis',
+      trigger: 'axis',
       axisPointer: {
         lineStyle: {
           width: 1,
@@ -184,37 +184,62 @@ onMounted(() => {
         }
       }
     },
-    grid: { left: '1%', right: '1%', top: '2  %', bottom: 0, containLabel: true },
     xAxis: {
       type: 'category',
-      data: ['6月', '7月', '8月', '9月', '10月', '11月', '12月']
+      boundaryGap: false,
+      data: [...new Array(18)].map((_item, index) => `${index + 6}:00`),
+      splitLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          type: 'solid',
+          color: 'rgba(226,226,226,0.5)'
+        }
+      },
+      axisTick: {
+        show: false
+      }
     },
-    yAxis: {
-      type: 'value',
-      max: 6000,
-      splitNumber: 4
-    },
+    yAxis: [
+      {
+        type: 'value',
+        max: 80000,
+        splitNumber: 4,
+        axisTick: {
+          show: false
+        },
+        splitArea: {
+          show: true,
+          areaStyle: {
+            color: ['rgba(255,255,255,0.2)', 'rgba(226,226,226,0.2)']
+          }
+        }
+      }
+    ],
+    grid: { left: '1%', right: '1%', top: '2  %', bottom: 0, containLabel: true },
     series: [
       {
-        data: [4200, 3200, 2100, 3000, 5100, 6000, 3200, 4800],
-        type: 'bar',
-        barMaxWidth: 80,
+        smooth: true,
+        data: [
+          111, 222, 4000, 18000, 33333, 55555, 66666, 33333, 14000, 36000, 66666, 44444, 22222,
+          11111, 4000, 2000, 500, 333, 222, 111
+        ],
+        type: 'line',
+        areaStyle: {},
         itemStyle: {
-          // 这里是颜色
-          color: function (params: { dataIndex: any }) {
-            // 注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
-            const colorList = [
-              '#5470c6',
-              '#91cc75',
-              '#fac858',
-              '#ee6666',
-              '#73c0de',
-              '#7fae90',
-              '#ca8622',
-              '#ffd3df'
-            ]
-            return colorList[params.dataIndex]
-          }
+          color: '#5ab1ef'
+        }
+      },
+      {
+        smooth: true,
+        data: [
+          33, 66, 88, 333, 3333, 5000, 18000, 3000, 1200, 13000, 22000, 11000, 2221, 1201, 390,
+          198, 60, 30, 22, 11
+        ],
+        type: 'line',
+        areaStyle: {},
+        itemStyle: {
+          color: '#019680'
         }
       }
     ]
@@ -255,32 +280,59 @@ onMounted(() => {
   })
   setOptions2({
     legend: {
-      data: ['持续力', '攻击力'],
-      orient: 'vertical',
-      left: 'left'
+      bottom: 0,
+      data: ['访问', '购买']
     },
+    tooltip: {},
     radar: {
+      radius: '60%',
+      splitNumber: 8,
       indicator: [
-        { name: '暴击', max: 6500 },
-        { name: '普攻', max: 16000 },
-        { name: '天马流星拳', max: 30000 },
-        { name: '天马彗星拳', max: 38000 },
-        { name: '钻石星尘拳', max: 52000 },
-        { name: '星云气流', max: 25000 }
+        {
+          name: '电脑'
+        },
+        {
+          name: '充电器'
+        },
+        {
+          name: '耳机'
+        },
+        {
+          name: '手机'
+        },
+        {
+          name: 'Ipad'
+        },
+        {
+          name: '耳机'
+        }
       ]
     },
     series: [
       {
-        name: 'Budget vs spending',
         type: 'radar',
+        symbolSize: 0,
+        areaStyle: {
+          shadowBlur: 0,
+          shadowColor: 'rgba(0,0,0,.2)',
+          shadowOffsetX: 0,
+          shadowOffsetY: 10,
+          opacity: 1
+        },
         data: [
           {
-            value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: '持续力'
+            value: [90, 50, 86, 40, 50, 20],
+            name: '访问',
+            itemStyle: {
+              color: '#b6a2de'
+            }
           },
           {
-            value: [5000, 14000, 28000, 26000, 42000, 21000],
-            name: '攻击力'
+            value: [70, 75, 70, 76, 20, 85],
+            name: '购买',
+            itemStyle: {
+              color: '#5ab1ef'
+            }
           }
         ]
       }
@@ -288,68 +340,49 @@ onMounted(() => {
   })
   setOptions3({
     tooltip: {
-      trigger: 'item',
-      axisPointer: {
-        type: 'shadow'
-      }
+      trigger: 'item'
     },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: {
-      type: 'value',
-      boundaryGap: [0, 0.01]
-    },
-    yAxis: {
-      type: 'category',
-      data: ['北京', '上海', '深圳', '苏州', '广州', '杭州'].reverse()
+    legend: {
+      bottom: '0%',
+      left: 'center'
     },
     series: [
       {
-        name: '2021',
-        type: 'bar',
+        color: ['#5ab1ef', '#b6a2de', '#67e0e3', '#2ec7c9'],
+        name: '访问来源',
+        type: 'pie',
+        radius: ['30%', '60%'],
+        avoidLabelOverlap: false,
         itemStyle: {
-          // 这里是颜色
-          color: function (params: { dataIndex: any }) {
-            // 注意，如果颜色太少的话，后面颜色不会自动循环，最好多定义几个颜色
-            const colorList = [
-              '#ffd3df',
-              '#91cc75',
-              '#fac858',
-              '#ee6666',
-              '#73c0de',
-              '#7fae90',
-              '#ca8622',
-              '#5470c6'
-            ]
-            return colorList[params.dataIndex]
+          borderRadius: 10,
+          borderColor: '#fff',
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: '12',
+            fontWeight: 'bold'
           }
         },
-        data: [630230, 131744, 104970, 29034, 23489, 18203].reverse()
-      },
-      {
-        name: '2020',
-        type: 'bar',
-        itemStyle: {
-          // 这里是颜色
-          color: function (params: { dataIndex: any }) {
-            const colorList = [
-              '#ffd3df',
-              '#91cc75',
-              '#fac858',
-              '#ee6666',
-              '#73c0de',
-              '#7fae90',
-              '#ca8622',
-              '#5470c6'
-            ]
-            return colorList[params.dataIndex]
-          }
+        labelLine: {
+          show: false
         },
-        data: [780230, 291744, 304970, 39034, 60489, 66203].reverse()
+        data: [
+          { value: 1048, name: '搜索引擎' },
+          { value: 735, name: '直接访问' },
+          { value: 580, name: '邮件营销' },
+          { value: 484, name: '联盟广告' }
+        ],
+        animationType: 'scale',
+        animationEasing: 'exponentialInOut',
+        animationDelay: function () {
+          return Math.random() * 100
+        }
       }
     ]
   })
@@ -395,7 +428,6 @@ onMounted(() => {
     border-bottom: 1px solid rgba(118, 118, 118, 0.1);
     font-size: 16px;
     padding: 10px 20px;
-    margin-bottom: 40px;
   }
   .chart {
     padding: 10px 20px;

@@ -66,7 +66,9 @@ import Breadcrumb from './Breadcrumb.vue'
 import Logo from './Logo.vue'
 // import type { MenuOption } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
-
+import useModel from '@/hooks/core/useModel'
+import useStore from '@/store'
+const store = useStore()
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
@@ -75,6 +77,15 @@ const routeList: any = router.options.routes.filter(item => item.path === '/')[0
 const inverted = ref<boolean>(true)
 const collapsed = ref(false)
 const activeKey = ref<string | null>('')
+
+if (useModel() === 'mobile') {
+  collapsed.value = true
+}
+
+// 保存伸缩栏状态
+watch(() => collapsed.value, () => {
+  store.app.collapsed = collapsed.value
+}, { immediate: true })
 
 function renderMenuLabel(option: any) {
   return h(NEllipsis, null, {

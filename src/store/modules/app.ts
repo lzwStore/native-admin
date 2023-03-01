@@ -9,7 +9,8 @@ export const useAppStore = defineStore('app', {
       type: getLanguageType('lang') || 'zh',
       language: getLanguageType('lang') === 'zh' ? zhCN : enUS,
       date: getLanguageType('lang') === 'zh' ? dateZhCN : dateEnUS
-    }
+    },
+    collapsed: false
   }),
   actions: {
     setLangageEN () {
