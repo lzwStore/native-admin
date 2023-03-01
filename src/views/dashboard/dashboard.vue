@@ -88,7 +88,7 @@
       class="chart_container"
       :style="{ background: app.themeColor }"
     >
-      <div class="title">战斗力分析</div>
+      <div class="title">转化率</div>
       <div
         ref="chartRef2"
         class="chart"
@@ -99,7 +99,7 @@
       class="chart_container"
       :style="{ background: app.themeColor }"
     >
-      <div class="title">GDP分析</div>
+      <div class="title">访问来源</div>
       <div
         ref="chartRef3"
         class="chart"
@@ -128,7 +128,7 @@ interface List {
 const list = reactive<List[]>([
   {
     title: '访问量',
-    total: 12039,
+    total: 182039,
     state: 'up',
     percent: '30%',
     color: '#c42d4b',
@@ -136,7 +136,7 @@ const list = reactive<List[]>([
   },
   {
     title: '销售额',
-    total: 4039,
+    total: 14039,
     state: 'up',
     percent: '30%',
     color: '#b37feb',
@@ -246,15 +246,13 @@ onMounted(() => {
   })
   setOptions1({
     title: {
-      text: '销售额统计',
       left: 'center'
     },
     tooltip: {
       trigger: 'item'
     },
     legend: {
-      orient: 'vertical',
-      left: 'left'
+      left: 'center'
     },
     series: [
       {
