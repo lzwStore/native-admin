@@ -15,8 +15,8 @@
           <h5 class="white text-left mb10px">输入您的个人详细信息开始使用！</h5>
         </div>
       </div>
-      <div class="flex-center">
-        <div>
+      <div class="flex-center editer">
+        <div class="content w-450px">
           <h1 class="c-#000 text-left mb10px">登录</h1>
           <n-form
             ref="formRef"
@@ -97,7 +97,7 @@
                 <VerificationCode @getIdentifyCode="getIdentifyCode"></VerificationCode>
               </div>
             </n-form-item>
-            <n-row :gutter="[0, 24]">
+            <n-row>
               <n-col :span="24">
                 <div style="display: flex; justify-content: center">
                   <n-button
@@ -106,20 +106,18 @@
                     type="primary"
                     @click="handleValidateButtonClick"
                   >
-                    验证
+                    登录
                   </n-button>
                 </div>
               </n-col>
             </n-row>
-            <n-row :gutter="[0, 24]">
+            <n-row style="margin-top: 10px" class="tip">
               <n-col
-                class="white"
                 :span="6"
                 >账号: root</n-col
               >
               <n-col
-                class="white"
-                :span="6"
+                :span="12"
                 >密码: 123456</n-col
               >
             </n-row>
@@ -250,6 +248,12 @@ function handleValidateButtonClick(e: MouseEvent) {
 </script>
 
 <style scoped lang="less">
+@screen-xxl: 1920px;
+@screen-xl: 1536px;
+@screen-l: 1280px;
+@screen-m: 1024px;
+@screen-s: 640px;
+
 .login_container {
   height: 100%;
   width: 100%;
@@ -257,9 +261,12 @@ function handleValidateButtonClick(e: MouseEvent) {
   justify-content: center;
   align-items: center;
   background-color: #fff;
+  @media (max-width: @screen-m) {
+    background: #293146;
+  }
 
   .logo {
-    @media (max-width: 950px) {
+    @media (max-width: @screen-m) {
       display: none;
     }
   }
@@ -275,8 +282,31 @@ function handleValidateButtonClick(e: MouseEvent) {
     background-repeat: no-repeat;
     background-size: auto 100%;
     content: '';
-    @media (max-width: 950px) {
+    @media (max-width: @screen-m) {
       display: none;
+    }
+  }
+  .editer {
+    @media (max-width: @screen-m) {
+      background-color: #fff;
+      padding: 32px;
+      border-radius: 10px;
+    }
+    .content {
+      @media (max-width: @screen-s) {
+        width: 300px;
+      }
+
+      .tip {
+        @media (max-width: @screen-m) {
+          color: #000;
+        }
+      }
+    }
+    h1 {
+      @media (max-width: @screen-m) {
+        text-align: center;
+      }
     }
   }
   .white {
