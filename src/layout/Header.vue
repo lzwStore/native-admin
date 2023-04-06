@@ -54,7 +54,7 @@
           <n-avatar
             round
             size="small"
-            src="../assets/images/avatar.png"
+            :src="userImg"
           />
         </n-dropdown>
       </div>
@@ -69,6 +69,7 @@ import { Language, ExpandOutline, Contract } from '@vicons/ionicons5'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd'
 import screenFull from 'screenfull'
 import { setLanguageType, getLanguageType } from '@/utils/localstorage'
+import userImg from '@/assets/images/user.jpeg'
 import router from '@/router'
 
 const store = useStore()

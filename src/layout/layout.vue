@@ -40,7 +40,7 @@
         <n-layout-content class="layout_content">
           <Breadcrumb></Breadcrumb>
           <div
-            class="mt10"
+            class="content-box"
             style="padding: 0 10px 20px"
           >
             <router-view v-slot="{ Component, route }">
@@ -125,7 +125,7 @@ watch(
     height: calc(100vh - 60px);
     background-color: rgba(120, 120, 120, 0.1);
     overflow: hidden;
-    .mt10 {
+    .content-box {
       height: calc(100vh - 140px);
       overflow-y: auto;
       padding-bottom: 20px;

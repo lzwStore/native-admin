@@ -22,6 +22,8 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     camelcase: 'off',
     // 禁用函数名后加空格
-    'space-before-function-paren': 'off'
+    'space-before-function-paren': 'off',
+    'vue/valid-v-for': 0,
+    'vue/no-use-v-if-with-v-for': 0
   }
 }

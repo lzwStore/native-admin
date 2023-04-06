@@ -14,7 +14,8 @@ const zh = {
     one2: 'Menu1.2',
     two1: 'Menu2.1',
     richText: 'Rich Text',
-    components: 'components'
+    components: 'components',
+    chatGPT: 'ChatGPT'
   }
 }
 export default zh
