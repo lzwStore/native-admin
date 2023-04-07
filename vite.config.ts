@@ -79,34 +79,7 @@ export default ({ mode }: ConfigEnv) => {
           }
         }
       }),
-      svgBuilder('./src/assets/svgs/'), // 这里已经将src/assets/svgs/下的svg全部导入，无需再单独导入
-      Unocss({ // 使用Unocss
-        presets: [
-          presetUno(),
-          presetAttributify(),
-          presetIcons()
-        ],
-        rules: [ // 在这个可以增加预设规则, 也可以使用正则表达式
-          [
-            'p-c', // 使用时只需要写 p-c 即可应用该组样式
-            {
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)'
-            }
-          ],
-          [
-            'flex-center', // 使用时只需要写 p-c 即可应用该组样式
-            {
-              display: 'flex',
-              'justify-content': 'center',
-              'align-items': 'center'
-            }
-          ],
-          [/^m-(\d+)$/, ([, d]: any) => ({ margin: `${d / 4}rem` })]
-        ]
-      })
+      svgBuilder('./src/assets/svgs/') // 这里已经将src/assets/svgs/下的svg全部导入，无需再单独导入
     ],
     resolve: {
       // Vite路径别名配置

@@ -108,16 +108,8 @@ const pages: AddRouteRecordRaw[] = [
           keepAlive: false
         },
         component: () => import('@/views/tool/editer/editerPage.vue')
-      },
-      {
-        path: '/chatGPT',
-        name: 'chatGPT',
-        meta: {
-          title: 'route.chatGPT',
-          keepAlive: false
-        },
-        component: () => import('@/views/tool/chatGPT/chatGPT.vue')
       }
+
       // {
       //   path: '/code',
       //   name: 'code',
@@ -128,6 +120,15 @@ const pages: AddRouteRecordRaw[] = [
       //   component: () => import('@/views/components/Code/Code.vue')
       // }
     ]
+  },
+  {
+    path: '/chatGPT',
+    name: 'chatGPT',
+    meta: {
+      title: 'route.chatGPT',
+      keepAlive: false
+    },
+    component: () => import('@/views/tool/chatGPT/chatGPT.vue')
   }
 ]
 
