@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
+import { getStorage, setStorage } from '@/utils/localstorage'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
     name: '张三',
     counter: 99,
-    isLogin: false
+    isLogin: !!getStorage('isLogin') || false
   }),
   actions: {
     increment () {
@@ -15,6 +16,10 @@ export const useUserStore = defineStore('user', {
     },
     doubleCounter () {
       this.counter *= 2
+    },
+    setLoginStatus() {
+      setStorage('isLogin', true)
+      this.isLogin = true
     }
   },
   getters: {

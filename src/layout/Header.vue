@@ -5,7 +5,7 @@
   >
     <div>
       <n-icon
-        class="mr10 center menu"
+        class="mr10 center cursor"
         size="26"
         @click="emit('toggle')"
       >
@@ -36,7 +36,7 @@
         </n-icon>
       </n-dropdown>
       <div
-        class="center theme_conf"
+        class="center cursor"
         @click="toggleTheme"
       >
         <n-button quaternary>
@@ -44,7 +44,7 @@
           <span v-else>{{ t('msg.themeW') }}</span>
         </n-button>
       </div>
-      <div class="center theme_conf user_avatar">
+      <div class="center cursor user_avatar">
         <n-dropdown
           :inverted="store.app.theme === 'dark'"
           trigger="hover"
@@ -58,7 +58,11 @@
           />
         </n-dropdown>
       </div>
+      <div class="w20px cursor flex items-center ml10px">
+        <SettingOutlined @click="onSetClick"></SettingOutlined>
+      </div>
     </div>
+    <Drawer v-model:active="visible" title="主题配置" />
   </n-layout-header>
 </template>
 
@@ -66,9 +70,10 @@
 import { useI18n } from 'vue-i18n'
 import useStore from '@/store/index'
 import { Language, ExpandOutline, Contract } from '@vicons/ionicons5'
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd'
+import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined } from '@vicons/antd'
+import Drawer from '@/components/Drawer/Drawer.vue'
 import screenFull from 'screenfull'
-import { setLanguageType, getLanguageType } from '@/utils/localstorage'
+import { setStorage, getStorage } from '@/utils/localstorage'
 import userImg from '@/assets/images/user.jpeg'
 import router from '@/router'
 
@@ -95,12 +100,12 @@ const options = reactive([
   {
     label: '英文',
     key: 'en',
-    disabled: getLanguageType('lang') === 'en'
+    disabled: getStorage('lang') === 'en'
   },
   {
     label: '中文',
     key: 'zh',
-    disabled: getLanguageType('lang') === 'zh'
+    disabled: getStorage('lang') === 'zh'
   }
 ])
 
@@ -113,7 +118,7 @@ function toggleLanguage(val: string) {
       item.disabled = false
     }
   })
-  setLanguageType('lang', val)
+  setStorage('lang', val)
   if (val === 'zh') {
     store.app.setLangageZH()
   } else {
@@ -124,6 +129,10 @@ function toggleLanguage(val: string) {
 
 function toggleTheme() {
   store.app.theme = store.app.theme === 'white' ? 'dark' : 'white'
+}
+const visible = ref(false)
+function onSetClick () {
+  visible.value = true
 }
 
 onMounted(() => {
@@ -203,12 +212,8 @@ function onUserConfig(val: string) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .theme_conf {
-      cursor: pointer;
-    }
   }
-  .menu {
+  .cursor {
     cursor: pointer;
   }
 }
@@ -224,7 +229,6 @@ function onUserConfig(val: string) {
 
 .user_avatar {
   margin-left: 10px;
-  margin-right: 20px;
 }
 
 .cursor {

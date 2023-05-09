@@ -87,7 +87,7 @@
                 v-model:value="model.code"
                 clearable
                 type="text"
-                @keydown.enter.prevent
+                @keydown.enter.prevent="handleValidateButtonClick"
               >
                 <template #prefix>
                   <n-icon :component="ShieldCheckmarkSharp" />
@@ -133,6 +133,9 @@ import { FormInst, FormItemInst, FormItemRule, useMessage, FormRules } from 'nai
 import { Person, LockClosed, ShieldCheckmarkSharp } from '@vicons/ionicons5'
 import VerificationCode from '@/components/VerificationCode/VerificationCode.vue'
 import { getVaildCode } from '@/api/login/login'
+import useStore from '@/store/index'
+
+const store = useStore()
 
 getVaildCode().then((res: any) => {
   console.log('验证码1', res)
@@ -233,10 +236,11 @@ function validatePasswordSame(rule: FormItemRule, value: string): boolean {
   return value === model.value.password
 }
 
-function handleValidateButtonClick(e: MouseEvent) {
+function handleValidateButtonClick(e: MouseEvent | any) {
   e.preventDefault()
   formRef.value?.validate(errors => {
     if (!errors) {
+      store.user.setLoginStatus()
       router.push('/index')
       message.success('登录成功')
     } else {

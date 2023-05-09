@@ -5,7 +5,9 @@ import {
   PeopleSharp,
   Settings,
   BookmarkOutline,
-  ExtensionPuzzle
+  ExtensionPuzzle,
+  Open,
+  DocumentTextSharp
 } from '@vicons/ionicons5'
 
 const pages: AddRouteRecordRaw[] = [
@@ -35,7 +37,7 @@ const pages: AddRouteRecordRaw[] = [
         component: () => import('@/views/steam/user/user.vue'),
         meta: {
           title: 'route.user',
-          keepAlive: false,
+          keepAlive: true,
           icon: Person
         }
       },
@@ -45,7 +47,7 @@ const pages: AddRouteRecordRaw[] = [
         component: () => import('@/views/steam/role/role.vue'),
         meta: {
           title: 'route.role',
-          keepAlive: false,
+          keepAlive: true,
           icon: PeopleSharp
         }
       }
@@ -66,7 +68,8 @@ const pages: AddRouteRecordRaw[] = [
         name: 'level_one',
         component: () => import('@/views/levels/one/one.vue'),
         meta: {
-          title: 'route.one1'
+          title: 'route.one1',
+          keepAlive: false
         }
       },
       {
@@ -74,7 +77,8 @@ const pages: AddRouteRecordRaw[] = [
         name: 'level_two',
         component: () => import('@/layout/views.vue'),
         meta: {
-          title: 'route.one2'
+          title: 'route.one2',
+          keepAlive: false
         },
         children: [
           {
@@ -83,6 +87,7 @@ const pages: AddRouteRecordRaw[] = [
             component: () => import('@/views/levels/two/two.vue'),
             meta: {
               title: 'route.two1',
+              keepAlive: true,
               icon: BookmarkOutline
             }
           }
@@ -105,7 +110,8 @@ const pages: AddRouteRecordRaw[] = [
         name: 'Editer',
         meta: {
           title: 'route.richText',
-          keepAlive: false
+          keepAlive: true,
+          icon: DocumentTextSharp
         },
         component: () => import('@/views/tool/editer/editerPage.vue')
       }
@@ -122,13 +128,14 @@ const pages: AddRouteRecordRaw[] = [
     ]
   },
   {
-    path: '/chatGPT',
-    name: 'chatGPT',
+    path: '/chatgpt',
+    name: 'chatgpt',
     meta: {
-      title: 'route.chatGPT',
-      keepAlive: false
+      title: 'route.chatgpt',
+      keepAlive: false,
+      icon: Open
     },
-    component: () => import('@/views/tool/chatGPT/chatGPT.vue')
+    component: () => import('@/layout/views.vue')
   }
 ]
 

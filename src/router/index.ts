@@ -1,5 +1,5 @@
 import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router'
-import pages from './pages'
+import routerList from './pages'
 import type { Component } from 'vue'
 import { createDiscreteApi } from 'naive-ui'
 import useStore from '@/store/index'
@@ -26,7 +26,16 @@ const routes: AddRouteRecordRaw[] = [
       title: '',
       keepAlive: true
     },
-    children: pages
+    children: routerList
+  },
+  {
+    path: '/chatgpt',
+    name: 'chatgpt',
+    meta: {
+      title: 'route.chatgpt',
+      keepAlive: false
+    },
+    component: () => import('@/views/chatgpt/chatgpt.vue')
   },
   {
     path: '/login',
@@ -46,14 +55,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  loadingBar.start()
   const store = useStore()
-  console.log('store', store.user.isLogin)
-  if (!store.user.isLogin) {
-    next({ path: '/login' })
-    store.user.isLogin = true
+  if (!store.user.isLogin && to.path !== '/login') {
+    next({ path: '/login', replace: true })
     return
   }
-  loadingBar.start()
   next()
 })
 

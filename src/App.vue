@@ -8,15 +8,6 @@
     <n-loading-bar-provider>
       <n-dialog-provider>
         <n-message-provider>
-            <!-- <router-view v-slot="{ Component, route }">
-              <keep-alive v-if="route.meta.keepAlive">
-                <component :is="Component"></component>
-              </keep-alive>
-              <component
-                v-else
-                :is="Component"
-              ></component>
-            </router-view> -->
             <router-view></router-view>
           </n-message-provider>
         </n-dialog-provider>
