@@ -7,11 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CustomNode: typeof import('./src/components/Lineage/CustomNode.vue')['default']
     Drawer: typeof import('./src/components/Drawer/Drawer.vue')['default']
     Editor: typeof import('./src/components/Editor/Editor.vue')['default']
+    Lineage: typeof import('./src/components/Lineage/Lineage.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NButton: typeof import('naive-ui')['NButton']
     NCol: typeof import('naive-ui')['NCol']
+    NColorPicker: typeof import('naive-ui')['NColorPicker']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NDrawer: typeof import('naive-ui')['NDrawer']
@@ -31,10 +34,12 @@ declare module '@vue/runtime-core' {
     NMenu: typeof import('naive-ui')['NMenu']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NNumberAnimation: typeof import('naive-ui')['NNumberAnimation']
+    NPageHeader: typeof import('naive-ui')['NPageHeader']
     NRow: typeof import('naive-ui')['NRow']
     NStatistic: typeof import('naive-ui')['NStatistic']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NTag: typeof import('naive-ui')['NTag']
+    NTooltip: typeof import('naive-ui')['NTooltip']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SvgIcon: typeof import('./src/components/SvgIcon/SvgIcon.vue')['default']

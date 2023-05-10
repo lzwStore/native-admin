@@ -15,7 +15,8 @@ const zh = {
     two1: 'Menu2.1',
     richText: 'Rich Text',
     components: 'components',
-    chatGPT: 'ChatGPT'
+    chatGPT: 'ChatGPT',
+    x6: 'lineage&x6'
   }
 }
 export default zh

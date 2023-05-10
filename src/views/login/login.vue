@@ -87,7 +87,6 @@
                 v-model:value="model.code"
                 clearable
                 type="text"
-                @keydown.enter.prevent="handleValidateButtonClick"
               >
                 <template #prefix>
                   <n-icon :component="ShieldCheckmarkSharp" />
@@ -236,8 +235,7 @@ function validatePasswordSame(rule: FormItemRule, value: string): boolean {
   return value === model.value.password
 }
 
-function handleValidateButtonClick(e: MouseEvent | any) {
-  e.preventDefault()
+function handleValidateButtonClick() {
   formRef.value?.validate(errors => {
     if (!errors) {
       store.user.setLoginStatus()
@@ -249,6 +247,19 @@ function handleValidateButtonClick(e: MouseEvent | any) {
     }
   })
 }
+function onKeyDown(event: any) {
+  if (event.keyCode === 13 || event.which === 13) {
+    handleValidateButtonClick()
+  }
+}
+onMounted(() => {
+  document.addEventListener('keydown', onKeyDown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', onKeyDown)
+})
+
 </script>
 
 <style scoped lang="less">

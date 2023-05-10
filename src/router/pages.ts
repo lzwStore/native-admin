@@ -7,7 +7,8 @@ import {
   BookmarkOutline,
   ExtensionPuzzle,
   Open,
-  DocumentTextSharp
+  DocumentTextSharp,
+  CubeOutline
 } from '@vicons/ionicons5'
 
 const pages: AddRouteRecordRaw[] = [
@@ -114,17 +115,17 @@ const pages: AddRouteRecordRaw[] = [
           icon: DocumentTextSharp
         },
         component: () => import('@/views/tool/editer/editerPage.vue')
+      },
+      {
+        path: '/x6',
+        name: 'x6',
+        meta: {
+          title: 'route.x6',
+          keepAlive: false,
+          icon: CubeOutline
+        },
+        component: () => import('@/views/tool/x6/x6.vue')
       }
-
-      // {
-      //   path: '/code',
-      //   name: 'code',
-      //   meta: {
-      //     title: '代码编辑器',
-      //     keepAlive: false
-      //   },
-      //   component: () => import('@/views/components/Code/Code.vue')
-      // }
     ]
   },
   {

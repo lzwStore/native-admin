@@ -15,7 +15,8 @@ const en = {
     two1: '菜单2.1',
     richText: '富文本',
     components: '功能组件',
-    chatgpt: 'chatGPT'
+    chatgpt: 'chatGPT',
+    x6: '血缘图&流程图'
   }
 }
 export default en
