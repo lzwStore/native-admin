@@ -38,10 +38,10 @@
           @toggle="collapsed = !collapsed"
         ></HeaderVue>
         <n-layout-content class="layout_content">
-          <Breadcrumb style="padding: 10px 10px 0 10px"></Breadcrumb>
+          <Breadcrumb v-if='store.app.tabActive'></Breadcrumb>
           <div
-            class="mt10"
-            style="padding: 0 10px 20px"
+            :style="{'--height': height}"
+            class="content-box"
           >
             <router-view v-slot="{ Component, route }">
               <keep-alive v-if="route.meta.keepAlive">
@@ -66,15 +66,31 @@ import Breadcrumb from './Breadcrumb.vue'
 import Logo from './Logo.vue'
 // import type { MenuOption } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
-
+import useModel from '@/hooks/core/useModel'
+import useStore from '@/store'
+const store = useStore()
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 const routeList: any = router.options.routes.filter(item => item.path === '/')[0].children
 
 const inverted = ref<boolean>(true)
-const collapsed = ref(false)
+const collapsed = ref(store.app.collapsed)
 const activeKey = ref<string | null>('')
+
+if (useModel() === 'mobile') {
+  collapsed.value = store.app.collapsed
+}
+
+const height = computed(() => {
+  return store.app.tabActive ? 'calc(100vh - 140px)' : 'calc(100vh - 90px)'
+})
+
+// 保存伸缩栏状态
+watch(() => collapsed.value, (val) => {
+  store.app.setCollapsed(val)
+  store.app.collapsed = val
+}, { immediate: true })
 
 function renderMenuLabel(option: any) {
   return h(NEllipsis, null, {
@@ -114,33 +130,32 @@ watch(
     height: calc(100vh - 60px);
     background-color: rgba(120, 120, 120, 0.1);
     overflow: hidden;
-    .mt10 {
-      height: calc(100vh - 140px);
+    .content-box {
+      height: var(--height);
       overflow-y: auto;
       padding-bottom: 20px;
-      /*滚动条样式*/
-      &::-webkit-scrollbar {
-        width: 10px;
-        /*height: 4px;*/
-      }
-      &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-        background: rgba(0, 0, 0, 0.2);
-      }
+      margin-top: 5px;
+      padding: 0 10px 20px
     }
   }
 }
-.n-layout-header {
-  // background: rgba(128, 128, 128, 0.2);
-  // padding: 24px;
+// 滚动条宽度
+::-webkit-scrollbar {
+    width: 5px; /* 纵向滚动条*/
+    height: 5px; /* 横向滚动条 */
+    background-color: #fff;
 }
 
-.n-layout-sider {
-  // background: rgba(128, 128, 128, 0.3);
+/*定义滚动条轨道 内阴影*/
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: #ccc;
 }
 
-.n-layout-content {
-  // background: rgba(128, 128, 128, 0.4);
+/*定义滑块 内阴影*/
+::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    background-color: #aaabad;
+    border-radius: 10px;
 }
 </style>

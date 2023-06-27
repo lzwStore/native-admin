@@ -1,15 +1,17 @@
 import { defineStore } from 'pinia'
 import { zhCN, dateZhCN, enUS, dateEnUS } from 'naive-ui'
-import { getLanguageType } from '@/utils/localstorage'
+import { getStorage, setStorage } from '@/utils/localstorage'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
     theme: 'white', // white dark
     config: {
-      type: getLanguageType('lang') || 'zh',
-      language: getLanguageType('lang') === 'zh' ? zhCN : enUS,
-      date: getLanguageType('lang') === 'zh' ? dateZhCN : dateEnUS
-    }
+      type: getStorage('lang') || 'zh',
+      language: getStorage('lang') === 'zh' ? zhCN : enUS,
+      date: getStorage('lang') === 'zh' ? dateZhCN : dateEnUS
+    },
+    collapsed: !!getStorage('collapsed') || false,
+    tabActive: !!getStorage('tabActive') || false
   }),
   actions: {
     setLangageEN () {
@@ -21,6 +23,14 @@ export const useAppStore = defineStore('app', {
       this.config.language = zhCN
       this.config.type = 'zh'
       this.config.date = dateZhCN
+    },
+    setCollapsed(val: boolean) {
+      setStorage('collapsed', val)
+      this.collapsed = val
+    },
+    setSabActive(val: boolean) {
+      setStorage('tabActive', val)
+      this.tabActive = val
     }
   },
   getters: {

@@ -8,13 +8,20 @@ import { unref, nextTick, computed, ref } from 'vue'
 import { useEventListener } from '@/hooks/event/useEventListener'
 
 import echarts from '@/utils/lib/echarts'
+import useStore from '@/store'
 
 export function useECharts(
   elRef: Ref<HTMLDivElement>,
   theme?: 'default'
 ) {
+  const store = useStore()
   const getDarkTheme = computed(() => {
     return 'default'
+  })
+  watch(() => store.app.collapsed, () => {
+    setTimeout(() => {
+      resizeFn()
+    }, 300)
   })
 
   let chartInstance: echarts.ECharts | null = null
@@ -31,8 +38,6 @@ export function useECharts(
   })
 
   function initCharts(t = theme) {
-    console.log('init', unref(elRef))
-
     const el = unref(elRef)
     if (!el || !unref(el)) {
       return
@@ -50,7 +55,6 @@ export function useECharts(
 
   function setOptions(options: EChartsOption, clear = true) {
     cacheOptions.value = options
-    console.log('初始化', unref(elRef)?.offsetHeight, unref(getOptions), chartInstance)
 
     if (unref(elRef)?.offsetHeight === 0) {
       setOptions(unref(getOptions))

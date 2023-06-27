@@ -1,24 +1,27 @@
-export const getLanguageType = (key: string) => {
-  const val = localStorage.getItem(key) || 'zh'
-  if (typeof val === 'string' || val === null) {
+// 存储数据
+export const setStorage = (name: string, val: any) => {
+  if (typeof val !== 'object') {
+    window.localStorage.setItem(name, val)
+  } else {
+    window.localStorage.setItem(name, JSON.stringify(val))
+  }
+}
+
+// 获取数据
+export const getStorage = (name: string) => {
+  const value = window.localStorage.getItem(name) as any
+  try {
+    const val = JSON.parse(value)
     return val
-  } else {
-    return JSON.parse(val)
+  } catch (error) {
+    return value
   }
 }
 
-export const setLanguageType = (key: string, val: any) => {
-  if (typeof val === 'string') {
-    localStorage.setItem(key, val)
-  } else {
-    localStorage.setItem(key, JSON.stringify(val))
-  }
+// 删除数据
+export const removeStorage = (name: string) => {
+  window.localStorage.removeItem(name)
 }
-
-export const removeLanguageType = (key: string) => {
-  localStorage.removeItem(key)
-}
-
 /**
  * window.sessionStorage 浏览器临时缓存
  */

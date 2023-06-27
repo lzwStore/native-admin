@@ -1,0 +1,16 @@
+{
+  "id": "3999692",
+  "name": "native-vue3",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "34033601",
+      "name": "ChatGPT",
+      "font_class": "ChatGPT",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    }
+  ]
+}

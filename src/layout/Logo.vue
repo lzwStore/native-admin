@@ -1,14 +1,13 @@
 <template>
   <div class="container_logo" @click="router.push('/index')">
     <span>
-      <Logo name="logo" width="34" height="34"></Logo>
+      <SvgIcon name="logo" width="34" height="34"></SvgIcon>
     </span>
     <span class="name" v-show="props.isShow">NaiveAdmin</span>
   </div>
 </template>
 
 <script lang='ts' setup>
-import Logo from '@/components/SvgIcon/SvgIcon.vue'
 const router = useRouter()
 const props = defineProps({
   isShow: {

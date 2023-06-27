@@ -94,8 +94,12 @@ window.addEventListener('beforeunload', () => {
 
 <style lang="less" scoped>
 .container_breadcrumb {
-  height: 40px;
+  padding: 10px 10px 5px 10px;
   list-style: none;
+  height: auto;
+  width: 100%;
+  overflow: auto hidden;
+  white-space: nowrap;
   li {
     display: inline-block;
     .li_content {

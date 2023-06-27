@@ -14,7 +14,9 @@ const en = {
     one2: '菜单1.2',
     two1: '菜单2.1',
     richText: '富文本',
-    components: '功能组件'
+    components: '功能组件',
+    chatgpt: 'chatGPT',
+    x6: '血缘图&流程图'
   }
 }
 export default en

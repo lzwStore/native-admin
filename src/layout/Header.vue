@@ -5,7 +5,7 @@
   >
     <div>
       <n-icon
-        class="mr10 center menu"
+        class="mr10 center cursor"
         size="26"
         @click="emit('toggle')"
       >
@@ -36,7 +36,7 @@
         </n-icon>
       </n-dropdown>
       <div
-        class="center theme_conf"
+        class="center cursor"
         @click="toggleTheme"
       >
         <n-button quaternary>
@@ -44,7 +44,7 @@
           <span v-else>{{ t('msg.themeW') }}</span>
         </n-button>
       </div>
-      <div class="center theme_conf user_avatar">
+      <div class="center cursor user_avatar">
         <n-dropdown
           :inverted="store.app.theme === 'dark'"
           trigger="hover"
@@ -54,11 +54,15 @@
           <n-avatar
             round
             size="small"
-            src="https://image.baidu.com/search/detail?ct=503316480&z=&tn=baiduimagedetail&ipn=d&word=%E5%BC%80%E5%8F%91%E8%80%85%E5%A4%B4%E5%83%8F&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=-1&hd=&latest=&copyright=&cs=1316535536,2169855958&os=1650322977,3711014696&simid=1316535536,2169855958&pn=19&rn=1&di=7169026086108397569&ln=1823&fr=&fmq=1675308204055_R&ic=&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&is=0,0&istype=2&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=1e&objurl=http%3A%2F%2Fimg.duoziwang.com%2F2019%2F02%2F04091610283767.jpg&rpstart=0&rpnum=0&adpicid=0&nojc=undefined&dyTabStr=MCwzLDYsNCwxLDUsMiw3LDgsOQ%3D%3D"
+            :src="userImg"
           />
         </n-dropdown>
       </div>
+      <div class="w20px cursor flex items-center ml10px">
+        <SettingOutlined @click="onSetClick"></SettingOutlined>
+      </div>
     </div>
+    <Drawer v-model:active="visible" title="主题配置" />
   </n-layout-header>
 </template>
 
@@ -66,9 +70,11 @@
 import { useI18n } from 'vue-i18n'
 import useStore from '@/store/index'
 import { Language, ExpandOutline, Contract } from '@vicons/ionicons5'
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd'
+import { MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined } from '@vicons/antd'
+import Drawer from '@/components/Drawer/Drawer.vue'
 import screenFull from 'screenfull'
-import { setLanguageType, getLanguageType } from '@/utils/localstorage'
+import { setStorage, getStorage } from '@/utils/localstorage'
+import userImg from '@/assets/images/user.jpeg'
 import router from '@/router'
 
 const store = useStore()
@@ -94,12 +100,12 @@ const options = reactive([
   {
     label: '英文',
     key: 'en',
-    disabled: getLanguageType('lang') === 'en'
+    disabled: getStorage('lang') === 'en'
   },
   {
     label: '中文',
     key: 'zh',
-    disabled: getLanguageType('lang') === 'zh'
+    disabled: getStorage('lang') === 'zh'
   }
 ])
 
@@ -112,7 +118,7 @@ function toggleLanguage(val: string) {
       item.disabled = false
     }
   })
-  setLanguageType('lang', val)
+  setStorage('lang', val)
   if (val === 'zh') {
     store.app.setLangageZH()
   } else {
@@ -123,6 +129,10 @@ function toggleLanguage(val: string) {
 
 function toggleTheme() {
   store.app.theme = store.app.theme === 'white' ? 'dark' : 'white'
+}
+const visible = ref(false)
+function onSetClick () {
+  visible.value = true
 }
 
 onMounted(() => {
@@ -202,12 +212,8 @@ function onUserConfig(val: string) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    .theme_conf {
-      cursor: pointer;
-    }
   }
-  .menu {
+  .cursor {
     cursor: pointer;
   }
 }
@@ -223,7 +229,6 @@ function onUserConfig(val: string) {
 
 .user_avatar {
   margin-left: 10px;
-  margin-right: 20px;
 }
 
 .cursor {

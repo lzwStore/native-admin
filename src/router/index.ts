@@ -1,7 +1,8 @@
 import { createWebHashHistory, createRouter, RouteRecordRaw } from 'vue-router'
-import pages from './pages'
+import routerList from './pages'
 import type { Component } from 'vue'
 import { createDiscreteApi } from 'naive-ui'
+import useStore from '@/store/index'
 
 // 对RouteRecordRaw类型进行扩展
 export type AddRouteRecordRaw = RouteRecordRaw & {
@@ -25,7 +26,16 @@ const routes: AddRouteRecordRaw[] = [
       title: '',
       keepAlive: true
     },
-    children: pages
+    children: routerList
+  },
+  {
+    path: '/chatgpt',
+    name: 'chatgpt',
+    meta: {
+      title: 'route.chatgpt',
+      keepAlive: false
+    },
+    component: () => import('@/views/chatgpt/chatgpt.vue')
   },
   {
     path: '/login',
@@ -37,7 +47,6 @@ const routes: AddRouteRecordRaw[] = [
     }
   }
 ]
-
 const router = createRouter({
   history: createWebHashHistory(),
   // 刷新时，滚动条位置还原
@@ -47,6 +56,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   loadingBar.start()
+  const store = useStore()
+  if (!store.user.isLogin && to.path !== '/login') {
+    next({ path: '/login', replace: true })
+    return
+  }
   next()
 })
 

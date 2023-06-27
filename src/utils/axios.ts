@@ -11,6 +11,9 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.request.use((config) => {
   loadingBar.start()
   console.log(config, '---')
+  const data = config.data || '{}'
+  console.log('data', data)
+
   // config.headers['Access-Control-Allow-Origin'] = 'https://api.youlai.tech/'
   // const token = localStorage.getItem('token')
   // if (token && config.headers) {

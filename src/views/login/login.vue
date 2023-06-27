@@ -1,103 +1,127 @@
 <template>
   <div class="login_container">
-    <div>
-      <h2 class="white align_center mb10">登录</h2>
-      <div style="width: 400px">
-        <n-form
-          ref="formRef"
-          label-placement="left"
-          label-width="auto"
-          :model="model"
-          :rules="rules"
-          :show-label="false"
-        >
-          <n-form-item
-            path="number"
-            label="账号"
+    <div class="flex justify-center items-center">
+      <div class="flex-center z-99 logo mr110px">
+        <div class="mr-60px">
+          <div class="text-30px c-#fff text-center">
+            <span>VVT Admin</span>
+          </div>
+          <SvgIcon
+            name="login"
+            width="400"
+            height="400"
+          />
+          <h2 class="white text-left mb10px">开箱即用的中后台管理系统</h2>
+          <h5 class="white text-left mb10px">输入您的个人详细信息开始使用！</h5>
+        </div>
+      </div>
+      <div class="flex-center editer">
+        <div class="content w-450px">
+          <h1 class="c-#000 text-left mb10px">登录</h1>
+          <n-form
+            ref="formRef"
+            label-placement="left"
+            label-width="auto"
+            :model="model"
+            :rules="rules"
+            :show-label="false"
           >
-            <n-input
-              placeholder="账号"
-              clearable
-              v-model:value="model.number"
-              @keydown.enter.prevent
+            <n-form-item
+              path="number"
+              label="账号"
             >
-              <template #prefix>
-                <n-icon :component="Person" />
-              </template>
-            </n-input>
-          </n-form-item>
-          <n-form-item
-            path="password"
-            label="密码"
-          >
-            <n-input
-              v-model:value="model.password"
-              clearable
-              type="password"
-              show-password-on="click"
-              @keydown.enter.prevent
+              <n-input
+                placeholder="账号"
+                clearable
+                v-model:value="model.number"
+                @keydown.enter.prevent
+                size="large"
+              >
+                <template #prefix>
+                  <n-icon :component="Person" />
+                </template>
+              </n-input>
+            </n-form-item>
+            <n-form-item
+              path="password"
+              label="密码"
             >
-              <template #prefix>
-                <n-icon :component="LockClosed" />
-              </template>
-            </n-input>
-          </n-form-item>
-          <!-- <n-form-item
-            ref="rPasswordFormItemRef"
-            first
-            path="reenteredPassword"
-            label="重复密码"
-          >
-            <n-input
-              v-model:value="model.reenteredPassword"
-              :disabled="!model.password"
-              type="password"
-              @keydown.enter.prevent
+              <n-input
+                v-model:value="model.password"
+                clearable
+                type="password"
+                show-password-on="click"
+                @keydown.enter.prevent
+                size="large"
+              >
+                <template #prefix>
+                  <n-icon :component="LockClosed" />
+                </template>
+              </n-input>
+            </n-form-item>
+            <!-- <n-form-item
+              ref="rPasswordFormItemRef"
+              first
+              path="reenteredPassword"
+              label="重复密码"
             >
-              <template #prefix>
-                <n-icon :component="LockClosed" />
-              </template>
-            </n-input>
-          </n-form-item> -->
-          <n-form-item
-            ref="codeRef"
-            first
-            path="code"
-            label="验证码"
-          >
-            <n-input
-              v-model:value="model.code"
-              clearable
-              type="text"
-              @keydown.enter.prevent
+              <n-input
+                v-model:value="model.reenteredPassword"
+                :disabled="!model.password"
+                type="password"
+                @keydown.enter.prevent
+              >
+                <template #prefix>
+                  <n-icon :component="LockClosed" />
+                </template>
+              </n-input>
+            </n-form-item> -->
+            <n-form-item
+              ref="codeRef"
+              first
+              path="code"
+              label="验证码"
+              size="large"
             >
-              <template #prefix>
-                <n-icon :component="ShieldCheckmarkSharp" />
-              </template>
-            </n-input>
-            <div style="width: 120px; height: 34px">
-              <VerificationCode @getIdentifyCode="getIdentifyCode"></VerificationCode>
-            </div>
-          </n-form-item>
-          <n-row :gutter="[0, 24]">
-            <n-col :span="24">
-              <div style="display: flex; justify-content: center">
-                <n-button
-                  style="width: 100%"
-                  :disabled="model.number === null"
-                  type="primary"
-                  @click="handleValidateButtonClick"
-                >
-                  验证
-                </n-button>
+              <n-input
+                v-model:value="model.code"
+                clearable
+                type="text"
+              >
+                <template #prefix>
+                  <n-icon :component="ShieldCheckmarkSharp" />
+                </template>
+              </n-input>
+              <div style="width: 120px; height: 34px">
+                <VerificationCode @getIdentifyCode="getIdentifyCode"></VerificationCode>
               </div>
-            </n-col>
-          </n-row>
-          <n-row :gutter="[0, 24]">
-            <n-col class="white" :span="6">账号: 随便填</n-col>
-            <n-col class="white" :span="6">密码: 随便输入</n-col>
-          </n-row>
-        </n-form>
+            </n-form-item>
+            <n-row>
+              <n-col :span="24">
+                <div style="display: flex; justify-content: center">
+                  <n-button
+                    style="width: 100%"
+                    :disabled="model.number === null"
+                    type="primary"
+                    @click="handleValidateButtonClick"
+                  >
+                    登录
+                  </n-button>
+                </div>
+              </n-col>
+            </n-row>
+            <n-row style="margin-top: 10px" class="tip">
+              <n-col
+                :span="6"
+                >账号: root</n-col
+              >
+              <n-col
+                :span="12"
+                >密码: 123456</n-col
+              >
+            </n-row>
+          </n-form>
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +132,9 @@ import { FormInst, FormItemInst, FormItemRule, useMessage, FormRules } from 'nai
 import { Person, LockClosed, ShieldCheckmarkSharp } from '@vicons/ionicons5'
 import VerificationCode from '@/components/VerificationCode/VerificationCode.vue'
 import { getVaildCode } from '@/api/login/login'
+import useStore from '@/store/index'
+
+const store = useStore()
 
 getVaildCode().then((res: any) => {
   console.log('验证码1', res)
@@ -116,7 +143,7 @@ getVaildCode().then((res: any) => {
 interface ModelType {
   number: string | null
   password: string | null
-  code: string | null,
+  code: string | null
 }
 const router = useRouter()
 const formRef = ref<FormInst | null>(null)
@@ -125,8 +152,8 @@ const codeRef = ref<FormItemInst | null>(null)
 const message = useMessage()
 
 const model = ref<ModelType>({
-  number: null,
-  password: null,
+  number: 'root',
+  password: '123456',
   code: null
 })
 
@@ -208,10 +235,10 @@ function validatePasswordSame(rule: FormItemRule, value: string): boolean {
   return value === model.value.password
 }
 
-function handleValidateButtonClick(e: MouseEvent) {
-  e.preventDefault()
+function handleValidateButtonClick() {
   formRef.value?.validate(errors => {
     if (!errors) {
+      store.user.setLoginStatus()
       router.push('/index')
       message.success('登录成功')
     } else {
@@ -220,37 +247,85 @@ function handleValidateButtonClick(e: MouseEvent) {
     }
   })
 }
+function onKeyDown(event: any) {
+  if (event.keyCode === 13 || event.which === 13) {
+    handleValidateButtonClick()
+  }
+}
+onMounted(() => {
+  document.addEventListener('keydown', onKeyDown)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', onKeyDown)
+})
+
 </script>
 
 <style scoped lang="less">
+@screen-xxl: 1920px;
+@screen-xl: 1536px;
+@screen-l: 1280px;
+@screen-m: 1024px;
+@screen-s: 640px;
+
 .login_container {
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #2d3a4b;
-  .white {
-    color: #fff;
+  background-color: #fff;
+  @media (max-width: @screen-m) {
+    background: #293146;
   }
-  .align_center {
-    text-align: center;
+
+  .logo {
+    @media (max-width: @screen-m) {
+      display: none;
+    }
   }
-  .mb10 {
-    margin-bottom: 10px;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-left: -48%;
+    background-image: url('@/assets/svgs/login-bg.svg');
+    background-position: 100%;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    content: '';
+    @media (max-width: @screen-m) {
+      display: none;
+    }
   }
-  .n-form {
-    .n-input, .n-input--disabled {
-      --n-color: transparent !important;
-      --n-border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      background: transparent !important;
-      :deep(.n-input__input .n-input__input-el) {
-        color: #FFF !important;
+  .editer {
+    @media (max-width: @screen-m) {
+      background-color: #fff;
+      padding: 32px;
+      border-radius: 10px;
+    }
+    .content {
+      @media (max-width: @screen-s) {
+        width: 300px;
+      }
+
+      .tip {
+        @media (max-width: @screen-m) {
+          color: #000;
+        }
       }
     }
-    .n-form-item {
-      color: #fff;
+    h1 {
+      @media (max-width: @screen-m) {
+        text-align: center;
+      }
     }
+  }
+  .white {
+    color: #fff;
   }
   .code {
     width: auto;
