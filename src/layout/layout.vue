@@ -38,7 +38,7 @@
           @toggle="collapsed = !collapsed"
         ></HeaderVue>
         <n-layout-content class="layout_content">
-          <Breadcrumb v-if='store.app.tabActive'></Breadcrumb>
+          <Breadcrumb v-if='!store.app.tabActive'></Breadcrumb>
           <div
             :style="{'--height': height}"
             class="content-box"

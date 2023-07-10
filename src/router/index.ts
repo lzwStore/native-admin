@@ -7,7 +7,7 @@ import useStore from '@/store/index'
 // 对RouteRecordRaw类型进行扩展
 export type AddRouteRecordRaw = RouteRecordRaw & {
   hidden?: boolean,
-  meta: {
+  meta?: {
     keepAlive: boolean,
     icon?: Component
   }
@@ -45,6 +45,27 @@ const routes: AddRouteRecordRaw[] = [
       title: '登录',
       keepAlive: false
     }
+  },
+  // 404 保底路由
+  {
+    path: '/:path(.*)*',
+    name: '404',
+    meta: {
+      hidden: true,
+      keepAlive: false
+    },
+    component: () => import('@/layout/layout.vue'),
+    children: [
+      {
+        path: '/:path(.*)*',
+        name: '',
+        component: () => import('@/views/404/404.vue'),
+        meta: {
+          title: '登录',
+          keepAlive: false
+        }
+      }
+    ]
   }
 ]
 const router = createRouter({

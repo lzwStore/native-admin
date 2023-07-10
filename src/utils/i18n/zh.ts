@@ -16,7 +16,8 @@ const en = {
     richText: '富文本',
     components: '功能组件',
     chatgpt: 'chatGPT',
-    x6: '血缘图&流程图'
+    x6: '血缘图&流程图',
+    icons: '图标选择器'
   }
 }
 export default en

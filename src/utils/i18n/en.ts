@@ -16,7 +16,8 @@ const zh = {
     richText: 'Rich Text',
     components: 'components',
     chatGPT: 'ChatGPT',
-    x6: 'lineage&x6'
+    x6: 'lineage&x6',
+    icons: 'icon picker'
   }
 }
 export default zh
