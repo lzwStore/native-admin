@@ -6,9 +6,10 @@ import {
   Settings,
   BookmarkOutline,
   ExtensionPuzzle,
-  Open,
+  // Open,
   DocumentTextSharp,
-  CubeOutline
+  CubeOutline,
+  FolderOpenOutline
 } from '@vicons/ionicons5'
 
 const pages: AddRouteRecordRaw[] = [
@@ -125,19 +126,29 @@ const pages: AddRouteRecordRaw[] = [
           icon: CubeOutline
         },
         component: () => import('@/views/tool/x6/x6.vue')
+      },
+      {
+        path: '/icons',
+        name: 'icons',
+        meta: {
+          title: 'route.icons',
+          keepAlive: false,
+          icon: FolderOpenOutline
+        },
+        component: () => import('@/views/tool/icons/index.vue')
       }
     ]
-  },
-  {
-    path: '/chatgpt',
-    name: 'chatgpt',
-    meta: {
-      title: 'route.chatgpt',
-      keepAlive: false,
-      icon: Open
-    },
-    component: () => import('@/layout/views.vue')
   }
+  // {
+  //   path: '/chatgpt',
+  //   name: 'chatgpt',
+  //   meta: {
+  //     title: 'route.chatgpt',
+  //     keepAlive: false,
+  //     icon: Open
+  //   },
+  //   component: () => import('@/layout/views.vue')
+  // },
 ]
 
 export default pages
